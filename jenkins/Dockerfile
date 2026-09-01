@@ -39,4 +39,7 @@ RUN apt-get update && apt-get install -y unzip && \
     rm /tmp/sonar-scanner-cli-6.2.1.4610-linux-aarch64.zip && \
     rm -rf /var/lib/apt/lists/*
 
+# Añadir jenkins al grupo docker
+RUN groupadd -f docker && usermod -aG docker jenkins
+
 USER jenkins
