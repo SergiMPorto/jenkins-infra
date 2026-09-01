@@ -40,6 +40,6 @@ RUN apt-get update && apt-get install -y unzip && \
     rm -rf /var/lib/apt/lists/*
 
 # Añadir jenkins al grupo docker
-RUN groupadd -f docker && usermod -aG docker jenkins
+RUN groupadd -f -g 984 docker && usermod -aG docker jenkins
 
 USER jenkins
