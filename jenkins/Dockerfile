@@ -39,7 +39,13 @@ RUN apt-get update && apt-get install -y unzip && \
     rm /tmp/sonar-scanner-cli-6.2.1.4610-linux-aarch64.zip && \
     rm -rf /var/lib/apt/lists/*
 
+    # Instalar Helm para arm64
+RUN curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+
 # Añadir jenkins al grupo docker
 RUN groupadd -f -g 984 docker && usermod -aG docker jenkins
+
+
 
 USER jenkins
