@@ -11,5 +11,7 @@ services:
     volumes:
       - /opt/jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     restart: unless-stopped
-
