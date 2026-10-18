@@ -1,0 +1,33 @@
+# Qué recoge Prometheus y de dónde
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  # El propio Prometheus
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # API FastAPI en K3s, a través de Traefik (192.168.1.200)
+  - job_name: milibrary-api
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["api.milibrary.home.arpa:80"]
+        labels:
+          app: milibrary-api
+          env: home
+
+  # Sistema de la Raspberry Pi (node-exporter en el host)
+  - job_name: raspberry
+    static_configs:
+      - targets: ["192.168.1.95:9100"]
+        labels:
+          host: raspberrypi
+
+  # Sistema de la VM de Jenkins (node-exporter en red host)
+  - job_name: jenkins-vm
+    static_configs:
+      - targets: ["192.168.1.50:9100"]
+        labels:
+          host: jenkis
